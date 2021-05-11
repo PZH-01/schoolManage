@@ -56,23 +56,43 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
-        path: '/Teacher/experimentlist',
-        name: 'Teacher/Experimentlist',
-        component: () => import('../views/Teacher/experiment/index.vue'),
+        path: '/Teacher/stydyManage',
+        name: 'Teacher/StydyManage',
+        component: () => import('../views/Teacher/stydyManage/index.vue'),
         meta: {
-          title: '实验管理',
+          title: '学习管理',
           icon: '',
           role: ['admin', 'teacher'],
         },
       },
       {
-        path: '/Teacher/experimentinfo',
-        name: 'Teacher/Experimentinfo',
-        component: () => import('../views/Teacher/experiment/info.vue'),
+        path: '/Teacher/performanceManagement',
+        name: 'Teacher/PerformanceManagement',
+        component: () => import('../views/Teacher/performanceManagement/index.vue'),
         meta: {
-          title: '实验详情',
+          title: '成绩管理',
           icon: '',
-          role: ['admin', 'teacher', 'student'],
+          role: ['admin', 'teacher'],
+        },
+      },
+      {
+        path: '/Teacher/statisticsCenter',
+        name: 'Teacher/StatisticsCenter',
+        component: () => import('../views/Teacher/statisticsCenter/index.vue'),
+        meta: {
+          title: '统计中心',
+          icon: '',
+          role: ['admin', 'teacher'],
+        },
+      },
+      {
+        path: '/Teacher/logManagement',
+        name: 'Teacher/LogManagement',
+        component: () => import('../views/Teacher/logManagement/index.vue'),
+        meta: {
+          title: '日志管理',
+          icon: '',
+          role: ['admin', 'teacher'],
         },
       },
       {

@@ -1,7 +1,7 @@
 <template lang="pug">
 .main
   breadcrumb
-  .div 这是列表页，主要用来显示面包屑
+  .div 这是列表页，主要用来显示面包屑 学习管理
   .div.pointer(@click='goInfo') 点击进入详情页
 </template>
 

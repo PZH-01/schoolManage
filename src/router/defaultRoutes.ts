@@ -11,25 +11,21 @@ const routes = {
       path: '/Teacher/classlist',
     },
     {
-      name: '实验管理',
-      path: '/Teacher/experimentlist',
+      name: '学习管理',
+      path: '/Teacher/stydyManage',
     },
     {
-      name: '报告管理',
-      path: '/Teacher/reportmanage',
+      name: '成绩管理',
+      path: '/Teacher/performanceManagement',
     },
     {
-      name: '资料中心',
-      path: '/Teacher/datacenter',
+      name: '统计中心',
+      path: '/Teacher/statisticsCenter',
     },
     {
-      name: '自定义',
-      path: '/Teacher/customcase',
+      name: '日志管理',
+      path: '/Teacher/logManagement',
     },
-    // {
-    //   name: '组件展示',
-    //   path: '/Teacher/exhibition',
-    // },
   ],
   teacher: [
     {
@@ -41,25 +37,21 @@ const routes = {
       path: '/Teacher/classlist',
     },
     {
-      name: '实验管理',
-      path: '/Teacher/experimentlist',
+      name: '学习管理',
+      path: '/Teacher/stydyManage',
     },
     {
-      name: '报告管理',
-      path: '/Teacher/reportmanage',
+      name: '成绩管理',
+      path: '/Teacher/performanceManagement',
     },
     {
-      name: '资料中心',
-      path: '/Teacher/datacenter',
+      name: '统计中心',
+      path: '/Teacher/statisticsCenter',
     },
     {
-      name: '自定义',
-      path: '/Teacher/customcase',
+      name: '日志管理',
+      path: '/Teacher/logManagement',
     },
-    // {
-    //   name: '组件展示',
-    //   path: '/Teacher/exhibition',
-    // },
   ],
   student: [
     {
