@@ -75,6 +75,7 @@ class Classe implements StoreOptions<State> {
       searchData.setKeyWord(data.keyWord);
       return new Promise((resolve) => {
         axios.getClassList(searchData).then((res) => {
+          console.log(res.data.data);
           commit('updateClassList', res.data.data.list || []);
           resolve(res.data.data);
         });

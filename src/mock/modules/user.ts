@@ -65,9 +65,9 @@ export function login(data: AjaxDate) {
 
 export function getConfig() {
   return Mock.mock({
-    copyRightValue: '©  2014 findsoft 上海哲寻信息科技有限公司',
+    copyRightValue: '©  2021 彭子豪毕业设计作品',
     message: null,
-    softName: '哲寻基础组件',
+    softName: '智慧校园管理平台',
     success: true,
     useCas: '0',
   });

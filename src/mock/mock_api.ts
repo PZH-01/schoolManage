@@ -30,4 +30,16 @@ export default class MockPath {
     changeUserSignatures = './api/user/changeUserSignature';
 
     changePasswords = './api/user/changePassword';
+
+    getLearnRecordsTotal = './api/stydyManage/getLearnRecordsTotal';
+
+    adminSort = './api/stydyManage/adminSort';
+
+    teacherSort = './api/stydyManage/teacherSort';
+
+    getSearchRecordsList = './api/stydyManage/getSearchRecordsList';
+
+    delrecord = './api/stydyManage/delrecord';
+
+    delrecordList = './api/stydyManage/delrecordList';
 }

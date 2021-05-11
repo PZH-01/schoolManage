@@ -5,6 +5,8 @@ import classe from './modules/classe';
 import userInfo from './modules/userInfo';
 import breadcrumb from './modules/breadcrumb';
 import exhibition from './modules/exhibition';
+import Header from './modules/stydyManage/Header';
+import Lists from './modules/stydyManage/Lists';
 
 const store = createStore({
   state: {
@@ -20,6 +22,8 @@ const store = createStore({
     userInfo,
     breadcrumb,
     exhibition,
+    Header,
+    Lists,
   },
 });
 
@@ -32,6 +36,8 @@ declare module 'vuex' {
     userInfo: typeof userInfo.state;
     breadcrumb: typeof breadcrumb.state;
     exhibition: typeof exhibition.state;
+    Header: typeof Header.state;
+    Lists: typeof Lists.state;
   }
   export function useStore<S = StoreStateType & ModulesType>(): Store<S>;
 }

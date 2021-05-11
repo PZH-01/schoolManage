@@ -1,30 +1,23 @@
 <template lang="pug">
 .main
-  breadcrumb
-  .div 这是列表页，主要用来显示面包屑 学习管理
-  .div.pointer(@click='goInfo') 点击进入详情页
+  Header
+  List
 </template>
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from 'vue';
-import { useRouter } from 'vue-router';
 
 export default defineComponent({
   components: {
-    breadcrumb: defineAsyncComponent(() => import('@/components/Breadcrumbs.vue')),
+    Header: defineAsyncComponent(
+      () => import('@/views/Teacher/stydyManage/Header.vue'),
+    ),
+    List: defineAsyncComponent(
+      () => import('@/views/Teacher/stydyManage/List.vue'),
+    ),
   },
   props: {},
-  setup() {
-    const router = useRouter();
-
-    const goInfo = () => {
-      router.push('/Teacher/experimentinfo');
-    };
-
-    return {
-      goInfo,
-    };
-  },
+  setup() {},
 });
 </script>
 

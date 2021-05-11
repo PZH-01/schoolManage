@@ -15,11 +15,18 @@ import {
   getClassList, editClass, delClass, insertStudent,
 } from './modules/classe';
 import { changeUserSignatures, changePasswords } from './modules/public/userInfo';
+import { getLearnRecordsTotal } from './modules/stydyManage/Header';
+import {
+  adminSort,
+  teacherSort,
+  getSearchRecordsList,
+  delrecord,
+  delrecordList,
+} from './modules/stydyManage/Lists';
 import MockPath from './mock_api';
 
 const mockPath = new MockPath();
 
-console.log('mock');
 Mock.setup({
   timeout: '10-1500',
 });
@@ -52,5 +59,18 @@ Mock.mock(mockPath.createUser, 'post', createUser);
 Mock.mock(mockPath.changeUserSignatures, 'post', changeUserSignatures);
 // 修改密码
 Mock.mock(mockPath.changePasswords, 'post', changePasswords);
+
+// 学习管理获取学习记录总条数
+Mock.mock(mockPath.getLearnRecordsTotal, 'post', getLearnRecordsTotal);
+// 管理员获取课程分类
+Mock.mock(mockPath.adminSort, 'post', adminSort);
+// 教师获取课程分类
+Mock.mock(mockPath.teacherSort, 'post', teacherSort);
+// 获取学习记录列表
+Mock.mock(mockPath.getSearchRecordsList, 'post', getSearchRecordsList);
+// 关闭一条学习记录
+Mock.mock(mockPath.delrecord, 'post', delrecord);
+// 关闭选中的学习记录
+Mock.mock(mockPath.delrecordList, 'post', delrecordList);
 
 export default Mock;
