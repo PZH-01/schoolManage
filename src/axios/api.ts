@@ -147,13 +147,25 @@ class Api {
    * 删除一条学习记录
    * @param formData
    */
-   delrecord = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.delrecord : '', formData);
+  delrecord = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.delrecord : '', formData);
 
-   /**
+  /**
    * 删除选中的学习记录
    * @param formData
    */
-    delrecordList = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.delrecordList : '', formData);
+  delrecordList = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.delrecordList : '', formData);
+
+  /**
+   * 获取日志列表
+   * @param formData
+   */
+  getLogList = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getLogList : '', formData);
+
+  /**
+   * 获取用户列表
+   * @param formData
+   */
+   getUserLists = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getUserLists : '', formData);
 }
 
 export default new Api();

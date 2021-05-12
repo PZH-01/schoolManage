@@ -7,14 +7,12 @@ import breadcrumb from './modules/breadcrumb';
 import exhibition from './modules/exhibition';
 import Header from './modules/stydyManage/Header';
 import Lists from './modules/stydyManage/Lists';
+import LogManages from './modules/logManage/logManages';
 
 const store = createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   modules: {
     system,
     user,
@@ -24,6 +22,7 @@ const store = createStore({
     exhibition,
     Header,
     Lists,
+    LogManages,
   },
 });
 
@@ -38,7 +37,8 @@ declare module 'vuex' {
     exhibition: typeof exhibition.state;
     Header: typeof Header.state;
     Lists: typeof Lists.state;
-  }
+    LogManages: typeof LogManages.state;
+  };
   export function useStore<S = StoreStateType & ModulesType>(): Store<S>;
 }
 

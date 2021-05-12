@@ -23,6 +23,8 @@ import {
   delrecord,
   delrecordList,
 } from './modules/stydyManage/Lists';
+import { getLogList, getUserLists } from './modules/logManage/logManages';
+
 import MockPath from './mock_api';
 
 const mockPath = new MockPath();
@@ -72,5 +74,10 @@ Mock.mock(mockPath.getSearchRecordsList, 'post', getSearchRecordsList);
 Mock.mock(mockPath.delrecord, 'post', delrecord);
 // 关闭选中的学习记录
 Mock.mock(mockPath.delrecordList, 'post', delrecordList);
+
+// 获取日志列表
+Mock.mock(mockPath.getLogList, 'post', getLogList);
+// 获取用户列表
+Mock.mock(mockPath.getUserLists, 'post', getUserLists);
 
 export default Mock;
