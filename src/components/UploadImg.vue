@@ -62,7 +62,7 @@ export default defineComponent({
     aFormItem: Form.Item,
     aButton: Button,
     aUpload: Upload,
-    // aIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    aIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
     VueCropper,
     aModal: Modal,
   },

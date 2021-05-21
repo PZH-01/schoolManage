@@ -104,7 +104,7 @@ export default defineComponent({
     aTable: Table,
     aPagination: Pagination,
     aUpload: Upload,
-    bIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    bIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
   },
   setup() {
     const store = useStore();

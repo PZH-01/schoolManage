@@ -84,7 +84,7 @@ export default defineComponent({
     aConfigProvider: ConfigProvider,
     aButton: Button,
     aPagination: Pagination,
-    bIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    bIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
   },
   props: {
     visible: {

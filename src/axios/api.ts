@@ -165,7 +165,19 @@ class Api {
    * 获取用户列表
    * @param formData
    */
-   getUserLists = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getUserLists : '', formData);
+  getUserLists = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getUserLists : '', formData);
+
+  /**
+   * 请求左侧教师列表
+   * @param formData
+   */
+  getteacherList = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getteacherList : '', formData);
+
+  /**
+   * 请求右侧班级列表
+   * @param formData
+   */
+  getClassGradesList = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getClassGradesList : '', formData);
 }
 
 export default new Api();

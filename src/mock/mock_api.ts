@@ -46,4 +46,10 @@ export default class MockPath {
   getLogList = './api/logManages/getLogList';
 
   getUserLists = './api/logManages/getUserLists';
+
+  getteacherList = './api/Grades/getteacherList';
+
+  getClassGradesList = './api/Grades/getClassGradesList';
+
+  getChart = './api/mock/studyColorList';
 }

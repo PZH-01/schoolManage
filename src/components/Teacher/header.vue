@@ -45,7 +45,7 @@ import { UserRole } from '@/types/user';
 export default defineComponent({
   components: {
     aBadge: Badge,
-    bIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    bIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
     aAvatar: Avatar,
     aPopover: Popover,
   },

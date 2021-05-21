@@ -45,7 +45,7 @@ export default defineComponent({
   components: {
     PageHeader: defineAsyncComponent(() => import('@/components/Public/Exhibition/PageHeader.vue')),
     aFluctuation: Fluctuation,
-    aIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    aIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
     aTag: Tag,
   },
   props: {},

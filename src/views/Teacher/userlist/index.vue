@@ -103,7 +103,7 @@ export default defineComponent({
     aButton: Button,
     aTable: Table,
     aPagination: Pagination,
-    bIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    bIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
     // breadcrumb,
   },
   props: {},

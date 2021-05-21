@@ -8,6 +8,8 @@ import exhibition from './modules/exhibition';
 import Header from './modules/stydyManage/Header';
 import Lists from './modules/stydyManage/Lists';
 import LogManages from './modules/logManage/logManages';
+import Grades from './modules/performanceManagement/Grades';
+import StatisticsStudy from './modules/statiscsCenter/StatisticsStudy';
 
 const store = createStore({
   state: {},
@@ -23,6 +25,8 @@ const store = createStore({
     Header,
     Lists,
     LogManages,
+    Grades,
+    StatisticsStudy,
   },
 });
 
@@ -38,6 +42,8 @@ declare module 'vuex' {
     Header: typeof Header.state;
     Lists: typeof Lists.state;
     LogManages: typeof LogManages.state;
+    Grades: typeof Grades.state;
+    StatisticsStudy: typeof StatisticsStudy.state;
   };
   export function useStore<S = StoreStateType & ModulesType>(): Store<S>;
 }

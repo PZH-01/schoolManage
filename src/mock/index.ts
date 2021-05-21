@@ -24,6 +24,9 @@ import {
   delrecordList,
 } from './modules/stydyManage/Lists';
 import { getLogList, getUserLists } from './modules/logManage/logManages';
+import { getteacherList, getClassGradesList } from './modules/performanceManagement/Grades';
+
+import { studyColorList } from './modules/statistics/study';
 
 import MockPath from './mock_api';
 
@@ -79,5 +82,13 @@ Mock.mock(mockPath.delrecordList, 'post', delrecordList);
 Mock.mock(mockPath.getLogList, 'post', getLogList);
 // 获取用户列表
 Mock.mock(mockPath.getUserLists, 'post', getUserLists);
+
+// 获取左侧教师列表
+Mock.mock(mockPath.getteacherList, 'post', getteacherList);
+// 获取右侧班级列表
+Mock.mock(mockPath.getClassGradesList, 'post', getClassGradesList);
+
+// 学习统计-色块list
+Mock.mock(mockPath.getChart, 'post', studyColorList);
 
 export default Mock;

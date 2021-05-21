@@ -109,7 +109,7 @@ export default defineComponent({
     aSelectOption: Select.Option,
     aInputNumber: InputNumber,
     aSwitch: Switch,
-    aIcon: defineAsyncComponent(() => import('@/components/BaseIcon.vue')),
+    aIcon: defineAsyncComponent(() => import('@/components/Icon.vue')),
   },
   props: {},
   setup() {
