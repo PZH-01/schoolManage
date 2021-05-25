@@ -120,7 +120,7 @@ export default defineComponent({
       options: ['10', '20', '30', '40', '50'], // 选项
       size: 'small', // 尺寸
       showJumper: false, // 是否显示跳页
-      showSize: false, // 是否显示条数切换
+      showSize: true, // 是否显示条数切换
     });
     const columnClass = [
       {

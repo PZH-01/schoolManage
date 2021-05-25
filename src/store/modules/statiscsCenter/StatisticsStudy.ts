@@ -1,6 +1,6 @@
 import { Moment } from 'moment';
 import { ActionTree, MutationTree, StoreOptions } from 'vuex';
-import axios from '@/axios/fetch';
+import axios from '@/axios/api';
 
 // 查询对象
 interface SearchForm {
@@ -190,6 +190,15 @@ class State {
     { type: '未完成', value: 0 },
     { type: '未学习', value: 0 },
   ]; // 记录分别 pieData
+
+  // 堆叠图区域的数据
+  stackedChart = {};
+
+  // 折线柱状图区域的数据
+  lineHistogramChart = {};
+
+  // 饼图区域的数据
+  pieChart = {};
 }
 
 class StatisticsStudy implements StoreOptions<State> {
@@ -198,205 +207,58 @@ class StatisticsStudy implements StoreOptions<State> {
   state = new State();
 
   mutations: MutationTree<State> = {
-    upSearchForm(store, data) {
-      store.searchForm = data;
+    // 更新堆叠图区域
+    updateStackedChart(store, data) {
+      store.stackedChart = data;
     },
-    upLoading(store, data: LoadingType) {
-      if (data.key === 'cardList') {
-        store.allLoading.cardList = data.type;
-      } else if (data.key === 'record') {
-        store.allLoading.record = data.type;
-      } else if (data.key === 'timeColumn') {
-        store.allLoading.timeColumn = data.type;
-      } else if (data.key === 'timeCircle') {
-        store.allLoading.timeCircle = data.type;
-      } else if (data.key === 'transform') {
-        store.allLoading.transform = data.type;
-      } else if (data.key === 'distribution') {
-        store.allLoading.distribution = data.type;
-      }
+    // 更新折线柱状图区域
+    updateLineHistogramChart(store, data) {
+      store.lineHistogramChart = data;
     },
-    upColorData(store, data) {
-      store.colorList = store.colorList.map((item, key) => {
-        const isAdd = !`${data[key].rate}`.includes('-');
-        const compare = isAdd ? `+${data[key].rate}%` : `${data[key].rate}%`;
-        // 处理累计时长——后端返回是秒数——产品需要？
-        // ×就是显示秒数
-        // let number: number|undefined = 0;
-        // if (key === 2 && data[key].count) {
-        //   number = Math.round((data[key].count || 0) / 3600);
-        // } else { number = data[key].count; }
-        const iData = {
-          ...item,
-          cNum: data[key].count || 0,
-          cCompare: compare,
-        };
-        return iData;
-      });
-    },
-    upRecordData(store, data) {
-      store.recordData = data;
-    },
-    upTimeColumn(store, data) {
-      // const indexType = 3;
-      // const currData = data[indexType - 1];
-      // data[indexType - 1] = data[0];
-      // data[0] = currData;
-      // bug：总-P-A 但是g2的图表显示是根据第一组来的，所以对前三个进行一个重新排序（更换位置）
-      // remark：es规范 Use array destructuring. 最后用数组解构重新赋值 arr1用来占位
-      const [arr0, arr1, arr2, ...arrAll] = data;
-      data = [arr2, arr0, arr1, ...arrAll];
-      store.timeColumn = data;
-    },
-    upTimeCircle(store, data) {
-      if (data.length > 0) {
-        store.timeCircle = store.timeCircle.map((item, key) => {
-          const iData = {
-            ...item,
-            number: data[key].count || 0,
-            percent: Math.abs(data[key].rate || 0) / 100,
-          };
-          return iData;
-        });
-      }
-    },
-    upTransform(store, data) {
-      if (data.length > 0) {
-        store.transformData = store.transformData.map((item, key) => {
-          const iData = {
-            ...item,
-            number: data[key].count,
-            percent: `${Math.abs(data[key].rate || 0)}%`,
-          };
-          return iData;
-        });
-      }
-    },
-    upDistribution(store, data) {
-      store.distributionData = data;
+    // 更新饼图区域
+    updatePieChart(store, data) {
+      store.pieChart = data;
     },
   };
 
   actions: ActionTree<State, unknown> = {
-    // color-list
-    getColorList({ commit }, data) {
-      const formData = new SearchClass(data);
-      commit('upLoading', { key: 'cardList', type: true });
-      // axios.post('./api/mock/studyColorList', formData).then((res) => {
-      //   console.log(res, 'ressss');
-      // });
+    // 获取堆叠图的数据
+    getStackedChart({ commit }) {
       return new Promise((resolve, reject) => {
-        axios
-          .post('api/statist/queryStudyTop', formData)
-          .then((res) => {
-            commit('upColorData', res.data.data || []);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          })
-          .finally(() => {
-            commit('upLoading', { key: 'cardList', type: false });
-          });
+        axios.getStackedChart().then((res) => {
+          console.log(res.data.data);
+          commit('updateStackedChart', res.data.data || []);
+          resolve(res);
+        });
       });
     },
-    // record
-    getRecordData({ commit }, data) {
-      const formData = new SearchClass(data);
-      console.log(data, 'datadatadatadatadata');
-      commit('upLoading', { key: 'record', type: true });
+    // 获取折线柱状图的数据
+    getLineHistoGramChart({ commit }) {
       return new Promise((resolve, reject) => {
-        axios
-          .post('api/statist/queryStudyStatist', formData)
-          .then((res) => {
-            commit('upRecordData', res.data.data || []);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          })
-          .finally(() => {
-            commit('upLoading', { key: 'record', type: false });
-          });
+        axios.getLineHistoGramChart().then((res) => {
+          console.log(res.data.data);
+          commit('updateLineHistogramChart', res.data.data || []);
+          resolve(res);
+        });
       });
     },
-    // timeColumn
-    getTimeColumn({ commit }, data) {
-      const formData = new SearchClass(data);
-      commit('upLoading', { key: 'timeColumn', type: true });
+    // 获取饼图的数据
+    getPieChart({ commit }) {
       return new Promise((resolve, reject) => {
-        axios
-          .post('api/statist/queryStudyTime', formData)
-          .then((res) => {
-            commit('upTimeColumn', res.data.data || []);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          })
-          .finally(() => {
-            commit('upLoading', { key: 'timeColumn', type: false });
-          });
+        axios.getPieChart().then((res) => {
+          console.log(res.data.data);
+          commit('updatePieChart', res.data.data || []);
+          resolve(res);
+        });
       });
     },
-    // timeCircle
-    getTimeCircle({ commit }, data) {
-      const formData = new SearchClass(data);
-      commit('upLoading', { key: 'timeCircle', type: true });
+    // 获取表格的数据
+    getListData({ commit }, data) {
       return new Promise((resolve, reject) => {
-        axios
-          .post('api/statist/queryStudyTimeRing', formData)
-          .then((res) => {
-            commit('upTimeCircle', res.data.data || []);
-            console.log(res, 'timeCircle');
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          })
-          .finally(() => {
-            commit('upLoading', { key: 'timeCircle', type: false });
-          });
-      });
-    },
-    // transform
-    getTransform({ commit }, data) {
-      const formData = new SearchClass(data);
-      commit('upLoading', { key: 'transform', type: true });
-      return new Promise((resolve, reject) => {
-        axios
-          .post('api/statist/queryRecordConversion', formData)
-          .then((res) => {
-            // console.log(res, 'resss');
-            commit('upTransform', res.data.data || []);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          })
-          .finally(() => {
-            commit('upLoading', { key: 'transform', type: false });
-          });
-      });
-    },
-    // distribution
-    getDistribution({ commit }, data) {
-      const formData = new SearchClass(data);
-      commit('upLoading', { key: 'distribution', type: true });
-      return new Promise((resolve, reject) => {
-        axios
-          .post('api/statist/queryRecordDistribution', formData)
-          .then((res) => {
-            // console.log(res, 'resss');
-            commit('upDistribution', res.data.data || []);
-            resolve(res);
-          })
-          .catch((err) => {
-            reject(err);
-          })
-          .finally(() => {
-            commit('upLoading', { key: 'distribution', type: false });
-          });
+        axios.getListData(data).then((res) => {
+          console.log(res.data.data);
+          resolve(res.data.data);
+        });
       });
     },
   };

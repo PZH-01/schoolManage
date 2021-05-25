@@ -6,24 +6,28 @@ function studyColorList(data: AjaxDate) {
   const requestData = JSON.parse(data.body);
   console.log(requestData, '请求data'); // @integer(1,99999)
   return Mock.mock(
-    new MockRequest([
-      {
-        name: '学习记录',
-        number: '@integer(1,99999)',
-      },
-      {
-        name: '已完成记录',
-        number: '@integer(1,99999)',
-      },
-      {
-        name: '记录累计时长',
-        number: '@integer(1,99999)',
-      },
-      {
-        name: '完成者',
-        number: '@integer(1,99999)',
-      },
-    ], null, true),
+    new MockRequest(
+      [
+        {
+          name: '学习记录',
+          number: '@integer(1,99999)',
+        },
+        {
+          name: '已完成记录',
+          number: '@integer(1,99999)',
+        },
+        {
+          name: '记录累计时长',
+          number: '@integer(1,99999)',
+        },
+        {
+          name: '完成者',
+          number: '@integer(1,99999)',
+        },
+      ],
+      null,
+      true,
+    ),
   );
 }
 function studyRecordList(data: AjaxDate) {
@@ -103,23 +107,200 @@ function studyRecordList(data: AjaxDate) {
     ];
   }
   return Mock.mock(
-    new MockRequest({
-      reponseData,
-    }, null, true),
+    new MockRequest(
+      {
+        reponseData,
+      },
+      null,
+      true,
+    ),
   );
 }
 function getAuthorInfo(data: AjaxDate) {
-  const body: { id: string} = JSON.parse(data.body);
+  const body: { id: string } = JSON.parse(data.body);
   return Mock.mock(
-    new MockRequest({
-      id: body.id || 'AuthorId',
-      avatar: "@image('50x50', '#50B347', '#FFF', '头像')",
-      authorName: '@ctitle(3,7)', // 方案名称
-      remark: '@title()', // 备注
-    }, null, true),
+    new MockRequest(
+      {
+        id: body.id || 'AuthorId',
+        avatar: "@image('50x50', '#50B347', '#FFF', '头像')",
+        authorName: '@ctitle(3,7)', // 方案名称
+        remark: '@title()', // 备注
+      },
+      null,
+      true,
+    ),
   );
 }
-
+function getStackedChart() {
+  return Mock.mock(
+    new MockRequest(
+      {
+        data1: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data2: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data3: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data4: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data5: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data6: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data7: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+      },
+      null,
+      true,
+    ),
+  );
+}
+function getLineHistoGramChart() {
+  return Mock.mock(
+    new MockRequest(
+      {
+        data1: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data2: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+        data3: [
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+          Math.random() * 100,
+        ],
+      },
+      null,
+      true,
+    ),
+  );
+}
+function getPieChart() {
+  return Mock.mock(
+    new MockRequest(
+      {
+        data1: Math.random() * 1000,
+        data2: Math.random() * 1000,
+        data3: Math.random() * 1000,
+        data4: Math.random() * 1000,
+        data5: Math.random() * 1000,
+      },
+      null,
+      true,
+    ),
+  );
+}
+function getListData(data: AjaxDate) {
+  const { pageNo = 1, pageSize = 15, totalRecords = 500 } = JSON.parse(data.body);
+  return Mock.mock(
+    new MockRequest(
+      {
+        [`list|${pageSize}`]: [
+          {
+            // key
+            id: '@guid',
+            studyLog: '@Integer(0,1000)',
+            finishLog: '@Integer(0,1000)',
+            timeLog: '@Integer(0,1000)',
+            finishNumber: '@Integer(0,1000)',
+            studyTime: '@Integer(0,1000)',
+          },
+        ],
+        pageNo,
+        totalRecords,
+      },
+      null,
+      true,
+    ),
+  );
+}
 export {
-  studyColorList, studyRecordList, getAuthorInfo,
+  studyColorList,
+  studyRecordList,
+  getAuthorInfo,
+  getStackedChart,
+  getLineHistoGramChart,
+  getPieChart,
+  getListData,
 };

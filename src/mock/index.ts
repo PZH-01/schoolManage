@@ -26,7 +26,13 @@ import {
 import { getLogList, getUserLists } from './modules/logManage/logManages';
 import { getteacherList, getClassGradesList } from './modules/performanceManagement/Grades';
 
-import { studyColorList } from './modules/statistics/study';
+import {
+  studyColorList,
+  getStackedChart,
+  getLineHistoGramChart,
+  getPieChart,
+  getListData,
+} from './modules/statistics/study';
 
 import MockPath from './mock_api';
 
@@ -90,5 +96,13 @@ Mock.mock(mockPath.getClassGradesList, 'post', getClassGradesList);
 
 // 学习统计-色块list
 Mock.mock(mockPath.getChart, 'post', studyColorList);
+// 获取堆叠图区域数据
+Mock.mock(mockPath.getStackedChart, 'post', getStackedChart);
+// 获取堆叠图区域数据
+Mock.mock(mockPath.getLineHistoGramChart, 'post', getLineHistoGramChart);
+// 获取堆叠图区域数据
+Mock.mock(mockPath.getPieChart, 'post', getPieChart);
+// 获取表格数据
+Mock.mock(mockPath.getListData, 'post', getListData);
 
 export default Mock;

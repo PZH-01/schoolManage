@@ -33,8 +33,11 @@
       .right
         img(src='@/assets/img/completed.png')
   .foot.margin-top-24.flex.flex-row
-    the-transform.chart-transform
-    the-distribution.chart-distribution
+    //- the-transform.chart-transform
+    //- the-distribution.chart-distribution
+    the-stackedChart(:EchartsData='EchartsDatas')
+    the-lineHistogramChart(:EchartsData='EchartsDatass')
+    the-PieChart(:EchartsData='EchartsDatasss')
 </template>
 
 <script lang="ts">
@@ -53,6 +56,13 @@ export default {
     theTime: defineAsyncComponent(() => import('./Study/Time.vue')),
     theSearch: defineAsyncComponent(() => import('./Study/Search.vue')),
     colorCard: defineAsyncComponent(() => import('./Study/ui/ColorCard.vue')),
+    theStackedChart: defineAsyncComponent(
+      () => import('./Charts/stackedChart.vue'),
+    ),
+    theLineHistogramChart: defineAsyncComponent(
+      () => import('./Charts/lineHistogramChart.vue'),
+    ),
+    thePieChart: defineAsyncComponent(() => import('./Charts/pieChart.vue')),
   },
   setup() {
     const store = useStore();
@@ -62,12 +72,25 @@ export default {
     const getLearnRecordsTotal = () => {
       store.dispatch('Header/getLearnRecordsTotal');
     };
+    // 堆叠图区域的数据
+    const EchartsDatas = computed(
+      () => store.state.StatisticsStudy.stackedChart,
+    );
+    // 折线柱状图区域的数据
+    const EchartsDatass = computed(
+      () => store.state.StatisticsStudy.lineHistogramChart,
+    );
+    // 饼图区域的数据
+    const EchartsDatasss = computed(() => store.state.StatisticsStudy.pieChart);
     onMounted(() => {
       getLearnRecordsTotal();
     });
 
     return {
       RecordsTotal,
+      EchartsDatas,
+      EchartsDatass,
+      EchartsDatasss,
     };
   },
 };
@@ -84,11 +107,8 @@ export default {
   .margin-top-24
     margin-top 24px
   .foot
-    .chart-transform
-      width calc(50% - 12px)
-    .chart-distribution
-      width calc(50% - 12px)
-      margin-left 24px
+    display flex
+    flex-direction column
   .imgbox
     margin 20px 0px
     display flex

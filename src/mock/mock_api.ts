@@ -52,4 +52,12 @@ export default class MockPath {
   getClassGradesList = './api/Grades/getClassGradesList';
 
   getChart = './api/mock/studyColorList';
+
+  getStackedChart = './api/mock/getStackedChart';
+
+  getLineHistoGramChart = './api/mock/getLineHistoGramChart';
+
+  getPieChart = './api/mock/getPieChart';
+
+  getListData = './api/mock/getListData';
 }

@@ -178,6 +178,27 @@ class Api {
    * @param formData
    */
   getClassGradesList = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getClassGradesList : '', formData);
+
+  /**
+   * 更新堆叠图区域数据
+   */
+  getStackedChart = () => axios.post(this.VUE_APP_MOCK ? mockpath.getStackedChart : '');
+
+  /**
+   * 更新折线柱状图区域数据
+   */
+  getLineHistoGramChart = () => axios.post(this.VUE_APP_MOCK ? mockpath.getLineHistoGramChart : '');
+
+  /**
+   * 更新折线柱状图区域数据
+   */
+  getPieChart = () => axios.post(this.VUE_APP_MOCK ? mockpath.getPieChart : '');
+
+  /**
+   * 请求右侧班级列表
+   * @param formData
+   */
+  getListData = (formData: unknown) => axios.post(this.VUE_APP_MOCK ? mockpath.getListData : '', formData);
 }
 
 export default new Api();

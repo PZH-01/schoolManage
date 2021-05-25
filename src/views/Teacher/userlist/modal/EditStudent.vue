@@ -12,7 +12,7 @@ a-modal.main(
     //- 如果 props 存在 classId ，表示是从班级管理过来的，自带classId。不需要显示Select，否则为用户列表，需要手动选择
     a-form-item(label='班级', name='classId',v-bind='validateInfos.classId', v-if='!props.classId')
       a-select(
-        v-model:value='formModel.classId'
+        v-model:value='formModel.className'
         placeholder='请选择'
         :disabled="props.isEdit"
         :default-active-first-option="false"

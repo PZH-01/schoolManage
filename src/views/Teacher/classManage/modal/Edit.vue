@@ -1,36 +1,70 @@
 <template lang="pug">
 a-modal.main(
-  :title="props.isEdit?'编辑班级':'创建班级'"
-  v-model:visible='props.visible'
+  :title='props.isEdit ? "编辑班级" : "创建班级"',
+  v-model:visible='props.visible',
   @cancel='onCancel'
 )
-  a-form(:label-col="labelCol", :wrapper-col="wrapperCol", :model='formModel', :rules='formRule')
-    a-form-item(label="班级名称", name='name', v-bind="validateInfos.name")
-      a-input(v-model:value='formModel.name', placeholder='填写班级名称', :maxlength="30")
-    a-form-item(label="班级描述", name='remark', v-bind="validateInfos.remark")
-      a-text-area(v-model:value='formModel.remark', placeholder='请输入班级描述', :maxlength="100",:showCount='false', style='height:50px;')
-    a-form-item(label='班级教师', name='teacherId',v-bind='validateInfos.teacherId')
+  a-form(
+    :label-col='labelCol',
+    :wrapper-col='wrapperCol',
+    :model='formModel',
+    :rules='formRule'
+  )
+    a-form-item(label='班级名称', name='name', v-bind='validateInfos.name')
+      a-input(
+        v-model:value='formModel.name',
+        placeholder='填写班级名称',
+        :maxlength='30'
+      )
+    a-form-item(label='班级描述', name='remark', v-bind='validateInfos.remark')
+      a-text-area(
+        v-model:value='formModel.remark',
+        placeholder='请输入班级描述',
+        :maxlength='100',
+        :showCount='false',
+        style='height: 50px'
+      )
+    a-form-item(
+      label='班级教师',
+      name='teacherId',
+      v-bind='validateInfos.teacherId'
+    )
       a-select(
-        v-model:value='formModel.teacherId'
-        placeholder='请选择'
-        :disabled="props.isEdit"
-        :default-active-first-option="false"
+        v-model:value='formModel.teacherId',
+        placeholder='请选择',
+        :disabled='props.isEdit',
+        :default-active-first-option='false',
         :filterOption='false'
       )
-        a-select-option( v-for="v in selectTeachers" :key="v.code" :value='v.code') {{v.name}}
+        a-select-option(
+          v-for='v in selectTeachers',
+          :key='v.code',
+          :value='v.code'
+        ) {{ v.name }}
   template(#footer)
-    a-button(key='back', type='primary', ghost @click='onCancel') 取消
+    a-button(key='back', type='primary', ghost, @click='onCancel') 取消
     a-button(key='submit', type='primary', @click='onSubmit') 保存
 </template>
 
 <script lang="ts">
 import {
-  Button, ConfigProvider, Form, Input, message, Modal, Select,
+  Button,
+  ConfigProvider,
+  Form,
+  Input,
+  message,
+  Modal,
+  Select,
 } from 'ant-design-vue';
 import { useForm } from '@ant-design-vue/use';
 import {
-  computed,
-  defineComponent, reactive, SetupContext, toRaw, watch,
+  ref,
+  defineComponent,
+  reactive,
+  SetupContext,
+  toRaw,
+  watch,
+  onMounted,
 } from 'vue';
 import { useStore } from 'vuex';
 import { EditClassFace } from '@/types/modules/classe';
@@ -70,26 +104,25 @@ export default defineComponent({
       teacherId: undefined,
     });
     const formRule = reactive({
-      name: [
-        { required: true, message: '请填写班级名称', trigger: 'blur' },
-      ],
-      remark: [
-        { required: true, message: '请填写班级描述', trigger: 'blur' },
-      ],
-      teacherId: [
-        { required: true, message: '请选择教师', trigger: 'change' },
-      ],
+      name: [{ required: true, message: '请填写班级名称', trigger: 'blur' }],
+      remark: [{ required: true, message: '请填写班级描述', trigger: 'blur' }],
+      teacherId: [{ required: true, message: '请选择教师', trigger: 'change' }],
     });
-    const { resetFields, validate, validateInfos } = useForm(formModel, formRule);
+    const { resetFields, validate, validateInfos } = useForm(
+      formModel,
+      formRule,
+    );
     // ⭐Update the loading effect after version 3
     const onSubmit = (e: Event) => {
       e.preventDefault();
       validate().then(async () => {
-        await store.dispatch('classe/editClassData', toRaw(formModel)).then(() => {
-          message.success(`${props.isEdit ? '修改成功' : '新增成功'}`);
-          resetFields();
-          context.emit('on-submit');
-        });
+        await store
+          .dispatch('classe/editClassData', toRaw(formModel))
+          .then(() => {
+            message.success(`${props.isEdit ? '修改成功' : '新增成功'}`);
+            resetFields();
+            context.emit('on-submit');
+          });
       });
     };
     const onCancel = () => {
@@ -106,7 +139,19 @@ export default defineComponent({
       },
       { deep: true },
     );
-
+    const selectTeachers = ref([]);
+    onMounted(() => {
+      store
+        .dispatch('user/getTeacherList', {
+          pageNo: 1,
+          pageSize: 15,
+          queryParam: { role: 1 },
+        })
+        .then((res) => {
+          console.log(res);
+          selectTeachers.value = res.list;
+        });
+    });
     return {
       props,
       onSubmit,
@@ -115,7 +160,7 @@ export default defineComponent({
       formModel,
       formRule,
       validateInfos,
-      selectTeachers: computed(() => store.state.user.teacherData),
+      selectTeachers,
       labelCol: { span: 5 },
       wrapperCol: { span: 17 },
     };
@@ -123,6 +168,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="stylus" scoped></style>

@@ -122,7 +122,10 @@ export default {
         keyWord: value,
         userId: isAdmin ? searchForm.teacherId : sessionStorage.code,
       };
-      // store.dispatch('StudentController/getSelectClass', Search);
+      console.log('在这里写触发更新视图数据的方法');
+      store.dispatch('StatisticsStudy/getStackedChart');
+      store.dispatch('StatisticsStudy/getLineHistoGramChart');
+      store.dispatch('StatisticsStudy/getPieChart');
     };
 
     const searchList = () => {
